@@ -10,6 +10,16 @@ Este proyecto es un microservicio RESTful desarrollado en Java con Spring Boot. 
 - **Arquitectura**: API REST con una estructura de 3 capas (Controlador, Servicio, Modelo).
 - **Patrón de Diseño**: Se utiliza el **Patrón Builder** para construir el objeto de respuesta (`PokemonStatsResponse`) de forma segura e inmutable.
 
+## Decisión de Diseño: El Patrón Builder
+
+La respuesta de la PokeAPI es un JSON complejo con múltiples objetos anidados y listas. Para transformar esta estructura en nuestro DTO (`PokemonStatsResponse`) simplificado y en español, se eligió el **Patrón Builder** por las siguientes razones:
+
+1.  **Construcción Paso a Paso**: Permite extraer y asignar los datos (nombre, hp, ataque, tipos, etc.) de forma incremental, haciendo que el código de transformación en `PokemonService` sea mucho más claro y legible.
+2.  **Inmutabilidad**: El patrón nos permite crear un objeto `PokemonStatsResponse` inmutable. Una vez construido, sus valores no pueden ser modificados, lo que garantiza la integridad de los datos a través del flujo de la aplicación.
+3.  **Claridad y Legibilidad**: Encapsula la lógica de construcción dentro de una clase interna (`Builder`), separándola de las responsabilidades del DTO y del servicio.
+
+La implementación de este patrón se encuentra en la clase `src/main/java/com/example/pokemonapi/model/PokemonStatsResponse.java`.
+
 ## Estructura del Proyecto
 
 El código fuente está organizado en los siguientes paquetes principales:
@@ -51,7 +61,15 @@ mvn spring-boot:run
 
 Una vez que la aplicación está en ejecución, puedes consumir el endpoint de las siguientes maneras:
 
-### Mediante el Navegador
+### Mediante el Endpoint Público (AWS)
+
+El microservicio ha sido desplegado en AWS Elastic Beanstalk y se puede consumir directamente a través de la siguiente URL pública:
+
+[http://pokemonapimicroservice1-env.eba-cvsrjd4h.us-east-2.elasticbeanstalk.com/pokemon/pikachu](http://pokemonapimicroservice1-env.eba-cvsrjd4h.us-east-2.elasticbeanstalk.com/pokemon/pikachu)
+
+Simplemente haz clic en el enlace o úsalo con cualquier cliente HTTP. Puedes cambiar `pikachu` por el nombre de cualquier otro Pokémon.
+
+### Mediante el Navegador (Local)
 
 Simplemente haz clic en el siguiente enlace o cópialo y pégalo en tu navegador:
 
@@ -59,9 +77,9 @@ Simplemente haz clic en el siguiente enlace o cópialo y pégalo en tu navegador
 
 Puedes cambiar `pikachu` por el nombre de cualquier otro Pokémon (e.g., `ditto`, `charizard`, `mewtwo`).
 
-### Mediante la Consola (curl)
+### Mediante la Consola (curl - Local)
 
-Abre una terminal y utiliza `curl` para hacer una solicitud:
+Abre una terminal y utiliza `curl` para hacer una solicitud a tu instancia local:
 
 ```bash
 curl http://localhost:8080/pokemon/pikachu
