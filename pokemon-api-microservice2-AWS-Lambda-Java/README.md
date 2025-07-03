@@ -104,13 +104,14 @@ La clase `com.pokemon.api.util.ApiResponse` se utiliza para estandarizar la crea
 
 ## Ejemplo de Uso
 
-Una vez desplegado, se podría acceder a la API de la siguiente manera (reemplaza `[YOUR_API_GATEWAY_URL]` con la URL de tu API Gateway):
+Una vez desplegado, se puede invocar la API a través de la siguiente URL. Simplemente reemplaza el tipo de Pokémon al final de la URL (por ejemplo, `fire`, `water`, `grass`).
 
-```
-GET [YOUR_API_GATEWAY_URL]/pokemons/type/fire
-```
+**URL Base:** `https://ryikgo3dob.execute-api.us-east-2.amazonaws.com/dev/pokemons/type/`
 
-**Respuesta de Éxito (Ejemplo):**
+**Ejemplo con el tipo `water`:**
+[https://ryikgo3dob.execute-api.us-east-2.amazonaws.com/dev/pokemons/type/water](https://ryikgo3dob.execute-api.us-east-2.amazonaws.com/dev/pokemons/type/water)
+
+**Respuesta de Éxito (Ejemplo para `fire`):**
 
 ```json
 [
@@ -139,3 +140,4 @@ GET [YOUR_API_GATEWAY_URL]/pokemons/type/fire
 {
   "error": "El tipo de Pokémon es un parámetro requerido."
 }
+```

@@ -1,0 +1,7 @@
+# Dependencies and packaging
+package/
+deployment_package.zip
+
+# Python cache
+__pycache__/
+*.pyc
